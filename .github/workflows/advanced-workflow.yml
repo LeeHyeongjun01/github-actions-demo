@@ -52,9 +52,16 @@ jobs:
     - name: Build project
       run: npm run build
       
+    - name: Create deployment directory
+      run: |
+        mkdir -p dist
+        cp -r src/* dist/ || echo "src 디렉토리가 없습니다"
+        echo "배포 준비 완료!" > dist/README.md
+      
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/main'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./src 
+        publish_dir: ./dist
+        force_orphan: true 
