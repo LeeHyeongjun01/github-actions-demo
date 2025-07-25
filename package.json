@@ -1,0 +1,14 @@
+{
+  "name": "github-actions-demo",
+  "version": "1.0.0",
+  "description": "GitHub Actions 실습 프로젝트",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/test.js",
+    "build": "echo '빌드 완료!'",
+    "start": "echo '서버 시작!'"
+  },
+  "keywords": ["github-actions", "ci-cd"],
+  "author": "Your Name",
+  "license": "MIT"
+} 

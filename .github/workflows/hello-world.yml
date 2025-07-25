@@ -1,0 +1,44 @@
+name: Hello World Workflow
+
+# 언제 실행할지 정의
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# 실행할 작업들
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1단계: 코드 체크아웃
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    # 2단계: Node.js 설정
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    # 3단계: 의존성 설치
+    - name: Install dependencies
+      run: npm install
+      
+    # 4단계: 테스트 실행
+    - name: Run tests
+      run: npm test
+      
+    # 5단계: 빌드
+    - name: Build project
+      run: npm run build
+      
+    # 6단계: 성공 메시지 출력
+    - name: Success message
+      run: |
+        echo "🎉 Hello World Workflow가 성공적으로 실행되었습니다!"
+        echo "현재 시간: $(date)"
+        echo "브랜치: ${{ github.ref }}"
+        echo "커밋: ${{ github.sha }}" 

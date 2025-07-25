@@ -1,0 +1,25 @@
+name: Workflow Monitoring
+
+on:
+  workflow_run:
+    workflows: ["Hello World Workflow", "Advanced Workflow"]
+    types: [completed]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion != 'skipped' }}
+    steps:
+    - name: Notify workflow result
+      run: |
+        echo "📊 워크플로우 모니터링 결과:"
+        echo "워크플로우: ${{ github.event.workflow_run.name }}"
+        echo "결과: ${{ github.event.workflow_run.conclusion }}"
+        echo "시작 시간: ${{ github.event.workflow_run.created_at }}"
+        echo "완료 시간: ${{ github.event.workflow_run.updated_at }}"
+        
+        if [[ "${{ github.event.workflow_run.conclusion }}" == "success" ]]; then
+          echo "✅ 워크플로우가 성공적으로 완료되었습니다!"
+        else
+          echo "❌ 워크플로우가 실패했습니다."
+        fi 
