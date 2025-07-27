@@ -24,12 +24,12 @@ jobs:
         fi
         
     - name: Show environment
-      run: echo "현재 환경: ${{ steps.env.outputs.environment }}"
+      run: |
+        echo "현재 환경: ${{ steps.env.outputs.environment }}"
       
   deploy:
     needs: detect-environment
     runs-on: ubuntu-latest
-    if: needs.detect-environment.outputs.environment != ''
     
     steps:
     - name: Checkout code
